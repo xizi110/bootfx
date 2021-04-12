@@ -30,8 +30,9 @@ class AppConfig {
     }
 
     private Image iconImage;
-    public Image getIconImage(){
-        if (icon != null && iconImage == null){
+
+    public Image getIconImage() {
+        if (icon != null && iconImage == null) {
             URL resource = getClass().getResource(icon);
             if (resource != null) {
                 iconImage = new Image(resource.toExternalForm());
