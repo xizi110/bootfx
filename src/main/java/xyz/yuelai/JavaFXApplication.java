@@ -7,9 +7,13 @@ import org.springframework.context.ApplicationEvent;
 public abstract class JavaFXApplication extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        bootApp();
+    public final void start(Stage primaryStage) throws Exception {
+        start();
     }
 
-    public abstract void bootApp() throws Exception;
+    /**
+     * 不需要默认的stage，所以替换 start(Stage primaryStage)
+     * @throws Exception
+     */
+    public abstract void start() throws Exception;
 }

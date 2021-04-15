@@ -1,32 +1,23 @@
 package xyz.yuelai;
 
-import javafx.application.Application;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.util.Set;
-
+/**
+ * spring启动监听器，启动成功后再启动JavaFX
+ * @author zhong
+ */
 public class SpringStartedListener implements ApplicationListener<ApplicationStartedEvent> {
 
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
-        Set<Object> allSources = event.getSpringApplication().getAllSources();
-        boolean app = false;
-        for (Object source : allSources) {
-            if (source instanceof Class) {
-                if (JavaFXApplication.class.isAssignableFrom((Class) source)) {
-                    app = true;
-                    ConfigurableApplicationContext applicationContext = event.getApplicationContext();
-                    ApplicationArguments arguments = applicationContext.getBean(ApplicationArguments.class);
-                    LauncherImpl.launchApplication((Class<? extends Application>) source, arguments.getSourceArgs());
-                    break;
-                }
-            }
-        }
-        if (!app) {
-            throw new IllegalArgumentException("Error: not fond JavaFXApplication class");
-        }
+        ConfigurableApplicationContext applicationContext = event.getApplicationContext();
+        // 从容器中获取application实例
+        JavaFXApplication fxApplication = applicationContext.getBean(JavaFXApplication.class);
+        LauncherImpl.application = fxApplication;
+        ApplicationArguments arguments = applicationContext.getBean(ApplicationArguments.class);
+        LauncherImpl.launchApplication(fxApplication.getClass(), arguments.getSourceArgs());
     }
 }

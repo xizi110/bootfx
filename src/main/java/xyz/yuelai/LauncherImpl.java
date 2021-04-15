@@ -91,7 +91,7 @@ class LauncherImpl {
 
     // Set to true to simulate a slow download progress
     private static final boolean simulateSlowProgress = false;
-    public static JavaFXApplication application;
+    public static Application application;
 
     // Ensure that launchApplication method is only called once
     private static AtomicBoolean launchCalled = new AtomicBoolean(false);
@@ -800,7 +800,7 @@ class LauncherImpl {
 //                        Constructor<? extends Application> c = appClass.getConstructor();
 //                        app.set(c.newInstance());
                         // 从 spring 中获取
-                        Application application = SpringBeanUtil.getBean(appClass);
+//                        Application application = SpringBeanUtil.getBean(appClass);
                         app.set(application);
                         // Set startup parameters
                         ParametersImpl.registerParameters(app.get(), new ParametersImpl(args));
