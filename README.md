@@ -80,7 +80,8 @@ public class App extends JavaFXApplication {
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
-也可以下载jar包引入
+
+也可以下载[bootfx-1.0-SNAPSHOT.jar](https://github.com/xizi110/bootfx/releases) jar包引入
 ```xml
 <dependency>
     <groupId>xyz.yuelai</groupId>
