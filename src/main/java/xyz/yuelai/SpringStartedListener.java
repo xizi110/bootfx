@@ -9,7 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * spring启动监听器，启动成功后再启动JavaFX
  * @author zhong
  */
-public class SpringStartedListener implements ApplicationListener<ApplicationStartedEvent> {
+class SpringStartedListener implements ApplicationListener<ApplicationStartedEvent> {
 
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {

@@ -45,13 +45,4 @@ public abstract class View extends FxView {
         getStage().hide();
     }
 
-//    public void reloadView() {
-//        FXMLLoader loader = getLoader();
-//        loader.setRoot(null);
-//        try {
-//            getScene().setRoot(loader.load());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
