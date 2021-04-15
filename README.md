@@ -24,6 +24,15 @@ public class App extends JavaFXApplication {
 }
 ```
 
+如果提示模块错误等信息，可以使用模块化开发也可以新建普通类，调用App类
+```java
+public class AppLauncher {
+    public static void main(String[] args) throws InterruptedException {
+        SpringApplication.run(App.class, args);
+    }
+}
+```
+
 可以自定义视图继承View类，使用spring注解@Component快速创建视图。
 ```java
 @Slf4j
@@ -48,17 +57,13 @@ public class LoginView extends View {
 }
 ```
 
-所以我们的启动类也可以简化为
+所以我们的App类可以简化为
 ```java
 @SpringBootApplication
 public class App extends JavaFXApplication {
 
     @Autowired
     LoginView loginView;
-
-    public static void main(String[] args) throws InterruptedException {
-        SpringApplication.run(App.class, args);
-    }
 
     @Override
     public void start() throws Exception {
