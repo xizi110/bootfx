@@ -71,3 +71,22 @@ public class App extends JavaFXApplication {
     }
 }
 ```
+
+可以clone项目到本地，执行mvn install之后，自己项目引入
+```xml
+<dependency>
+    <groupId>xyz.yuelai</groupId>
+    <artifactId>bootfx</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+也可以下载jar包引入
+```xml
+<dependency>
+    <groupId>xyz.yuelai</groupId>
+    <artifactId>bootfx</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <!--本机路径-->
+    <systemPath>xxx/xxx/bootfx-1.0-SNAPSHOT.jar</systemPath>
+</dependency>
+```
