@@ -15,5 +15,5 @@ public abstract class JavaFXApplication extends Application {
      * 不需要默认的stage，所以替换 start(Stage primaryStage)
      * @throws Exception
      */
-    public abstract void start() throws Exception;
+    public void start() throws Exception{};
 }
