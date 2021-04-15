@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationEvent;
 public abstract class JavaFXApplication extends Application {
 
     @Override
-    public final void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
         start();
     }
 
