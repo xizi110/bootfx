@@ -1,47 +1,55 @@
 package xyz.yuelai;
 
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.util.StringUtils;
+import xyz.yuelai.annotation.FxmlView;
 
-import java.io.IOException;
+import javax.annotation.PostConstruct;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-abstract class FxView implements Initializable {
+abstract class FxView {
     private Parent root;
-    private FXMLLoader loader;
+
+    @PostConstruct
+    void init() {
+        loadFxml();
+    }
 
     public Parent getRoot() {
-        if (this instanceof View) {
-            // 加载 fxml 获取 root node
-            if (root == null) {
-                loadFxml();
-            }
-        } else {
+        // 加载 fxml 获取 root node
+        if (root == null) {
             loadFxml();
         }
         return root;
     }
 
     protected String fxml() {
+        FxmlView fxmlView = AnnotationUtils.findAnnotation(getClass(), FxmlView.class);
+        if (fxmlView != null) {
+            String fxmlPath = fxmlView.fxmlPath();
+            if (StringUtils.hasText(fxmlPath)) {
+                return fxmlView.fxmlPath();
+            }
+        }
         return getClass().getSimpleName() + ".fxml";
     }
 
     protected ResourceBundle resourceBundle() {
         try {
             return ResourceBundle.getBundle("message");
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
 
     private void loadFxml() {
         try {
-            FXMLLoader loader = getLoader();
-            loader.setRoot(null);
             root = getLoader().load();
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -55,16 +63,11 @@ abstract class FxView implements Initializable {
         return url;
     }
 
-    public FXMLLoader getLoader() {
-        if (loader == null) {
-            loader = new FXMLLoader(resolveLocation(), resourceBundle());
-            loader.setController(this);
-        }
+    private FXMLLoader getLoader() {
+        FXMLLoader loader = new FXMLLoader(resolveLocation(), resourceBundle());
+        loader.setController(this);
+        loader.setRoot(null);
         return loader;
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
     }
 
 }

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=xyz.yuelai.AppConfig
-org.springframework.context.ApplicationListener=xyz.yuelai.SpringStartedListener
+org.springframework.context.ApplicationListener=xyz.yuelai.SpringEventListener

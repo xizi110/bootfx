@@ -799,8 +799,6 @@ class LauncherImpl {
                     try {
 //                        Constructor<? extends Application> c = appClass.getConstructor();
 //                        app.set(c.newInstance());
-                        // 从 spring 中获取
-//                        Application application = SpringBeanUtil.getBean(appClass);
                         app.set(application);
                         // Set startup parameters
                         ParametersImpl.registerParameters(app.get(), new ParametersImpl(args));
